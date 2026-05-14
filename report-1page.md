@@ -29,3 +29,24 @@ Khi mã hóa plaintext mẫu như:
 
 ```text
 hello FIT4012 AES
+```
+chương trình tạo file `message.aes` chứa ciphertext dạng binary. Sau đó chương trình giải mã đọc file này và khôi phục lại plaintext ban đầu chính xác.
+
+Các test đã thực hiện gồm:
+- Compile test
+- Encrypt/decrypt round-trip test
+- Multi-block plaintext test
+- Wrong key test
+- Tampered ciphertext test
+
+Sau khi sửa lỗi đọc/ghi file binary và lỗi CRLF trong shell script, toàn bộ test đều pass thành công.
+
+## Kết luận / Conclusion
+
+Bài lab giúp sinh viên hiểu rõ quy trình hoạt động của AES-128, bao gồm encryption, decryption, key expansion và xử lý block dữ liệu.
+
+Ngoài ra bài lab cũng cho thấy tầm quan trọng của việc xử lý dữ liệu nhị phân đúng cách khi làm việc với ciphertext. Trong tương lai có thể mở rộng project bằng cách:
+- sử dụng PKCS#7 padding,
+- bổ sung AES test vector chuẩn,
+- hỗ trợ mode CBC hoặc CTR,
+- tối ưu việc quản lý bộ nhớ và file binary.
