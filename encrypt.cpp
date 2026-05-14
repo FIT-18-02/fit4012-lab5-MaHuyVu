@@ -172,7 +172,7 @@ int main() {
 	ifstream infile;
 	infile.open("keyfile", ios::in | ios::binary);
 
-	if (infile.is_open())
+	if (infile.is_open())	
 	{
 		getline(infile, str); // The first line of file should be the key
 		infile.close();
@@ -211,7 +211,7 @@ int main() {
 	outfile.open("message.aes", ios::out | ios::binary);
 	if (outfile.is_open())
 	{
-		outfile << encryptedMessage;
+		outfile.write((char*)encryptedMessage, paddedMessageLen);
 		outfile.close();
 		cout << "Wrote encrypted message to file message.aes" << endl;
 	}

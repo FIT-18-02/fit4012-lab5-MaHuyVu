@@ -145,32 +145,24 @@ int main() {
 	cout << "=============================" << endl;
 
 	// Read in the message from message.aes
-	string msgstr;
-	ifstream infile;
-	infile.open("message.aes", ios::in | ios::binary);
+ifstream infile("message.aes", ios::binary);
 
-	if (infile.is_open())
-	{
-		getline(infile, msgstr); // The first line of file is the message
-		cout << "Read in encrypted message from message.aes" << endl;
-		infile.close();
-	}
+if (!infile.is_open()) {
+    cout << "Unable to open file" << endl;
+    return 1;
+}
 
-	else cout << "Unable to open file";
+infile.seekg(0, ios::end);
+int messageLen = infile.tellg();
+infile.seekg(0, ios::beg);
 
-	char * msg = new char[msgstr.size()+1];
+unsigned char* encryptedMessage = new unsigned char[messageLen];
 
-	strcpy(msg, msgstr.c_str());
+infile.read((char*)encryptedMessage, messageLen);
 
-	int n = strlen((const char*)msg);
+infile.close();
 
-	unsigned char * encryptedMessage = new unsigned char[n];
-	for (int i = 0; i < n; i++) {
-		encryptedMessage[i] = (unsigned char)msg[i];
-	}
-
-	// Free memory
-	delete[] msg;
+cout << "Read in encrypted message from message.aes" << endl;
 
 	// Read in the key
 	string keystr;
@@ -200,7 +192,7 @@ int main() {
 
 	KeyExpansion(key, expandedKey);
 	
-	int messageLen = strlen((const char *)encryptedMessage);
+	
 
 	unsigned char * decryptedMessage = new unsigned char[messageLen];
 
